@@ -5,4 +5,5 @@ type User struct {
 	EMail      string
 	ScreenName string
 	HPassword  string
+	ID         string
 }

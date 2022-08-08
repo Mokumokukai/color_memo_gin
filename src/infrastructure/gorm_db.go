@@ -39,6 +39,7 @@ func NewDB() *DB {
 		UserName: c.DB.Production.UserName,
 		Password: c.DB.Production.Password,
 	})
+
 }
 
 func NewTestDB() *DB {
