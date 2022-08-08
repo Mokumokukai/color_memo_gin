@@ -1,11 +1,15 @@
 package main
-import(
-    "github.com/gin-gonic/gin"
 
+import (
+	"github.com/Mokumokukai/color_memo_gin/src/infrastructure"
+	"github.com/Mokumokukai/color_memo_gin/src/registry"
 )
 
-func main(){
-	router := gin.Default()
+func main() {
+	db := infrastructure.NewDB()
+	defer infrastructure.CloseDB(db)
+	reg := registry.NewInteractor(db.Connection)
+	r := infrastructure.NewRouting(db, reg)
+	r.Run()
 
-    router.Run("localhost:8080")
 }

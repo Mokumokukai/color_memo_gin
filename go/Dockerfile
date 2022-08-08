@@ -6,4 +6,3 @@ RUN apk update && apk add git
 RUN go mod download
 RUN go get github.com/cosmtrek/air@v1.29.0
 
-CMD ["air"]
