@@ -2,12 +2,12 @@
 
 
 ## colors
-| メソッド | URI                                                                   | リソース                               | token必須か |
-| -------- | --------------------------------------------------------------------- | -------------------------------------- | ----------- |
-| GET      | [api/v1/memos](#apiv1memosget)                                      | 自動生成の色と人気の色組み合わせを返答 | 不要        |
-| POST     | [api/v1/memos](#apiv1memos(POST))                                   | 色メモの登録                           | 必要        |
+| メソッド | URI                                                               | リソース                               | token必須か |
+| -------- | ----------------------------------------------------------------- | -------------------------------------- | ----------- |
+| GET      | [api/v1/memos](#apiv1memosget)                                    | 自動生成の色と人気の色組み合わせを返答 | 不要        |
+| POST     | [api/v1/memos](#apiv1memos(POST))                                 | 色メモの登録                           | 必要        |
 | POST     | [api/v1/memos/:memo_id/edit](#apiv1memosmemoideditpost)           | 色メモの編集                           | 必要        |
-| POST     | [api/v1/memos/:memo_id/delete](#apiv1memosmemo_iddeletepost)                                      | 色メモの削除                           | 必要        |
+| POST     | [api/v1/memos/:memo_id/delete](#apiv1memosmemo_iddeletepost)      | 色メモの削除                           | 必要        |
 | POST     | [api/v1/memos/:memo_id/duplicate](#apiv1memosmemoidduplicatepost) | 色メモの複製                           | 必要        |
 
 ## api/v1/memos(GET)
@@ -127,7 +127,7 @@ color1, color2はサーバ側で名前順でソートする。
 | color      | object       | ソートされた色の組み合わせと作成者などの情報を格納 |
 | color1     | string       | 順番が若い方の色                                   |
 | color2     | string       | 順番が若くない色                                   |
-| owner_id  | string       | 所持者id                                           |
+| owner_id   | string       | 所持者id                                           |
 | creater_id | string       | 作成者id                                           |
 | created_at | string       | 作成日時                                           |
 | updated_at | string       | 更新日時                                           |
@@ -220,7 +220,7 @@ color1, color2はサーバ側で名前順でソートする。
 | color      | object       | ソートされた色の組み合わせと作成者などの情報を格納 |
 | color1     | string       | 順番が若い方の色                                   |
 | color2     | string       | 順番が若くない色                                   |
-| owner_id  | string       | 所持者id                                           |
+| owner_id   | string       | 所持者id                                           |
 | creater_id | string       | 作成者id                                           |
 | created_at | string       | 作成日時                                           |
 | updated_at | string       | 更新日時                                           |
@@ -335,7 +335,7 @@ color1, color2はサーバ側で名前順でソートする。
 | color      | object       | ソートされた色の組み合わせと作成者などの情報を格納 |
 | color1     | string       | 順番が若い方の色                                   |
 | color2     | string       | 順番が若くない色                                   |
-| owner_id  | string       | 所持者id                                           |
+| owner_id   | string       | 所持者id                                           |
 | creater_id | string       | 作成者id                                           |
 | created_at | string       | 作成日時                                           |
 | updated_at | string       | 更新日時                                           |

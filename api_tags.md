@@ -1,11 +1,11 @@
 # tags API
 
 ## tags
-| メソッド | URI | リソース | token必須か |
-| - | - | - | - |
-| GET | [api/v1/tags](#apiv1tagsget) | タグ一覧の取得 | 必須 |
-| POST | [api/v1/tags](#apiv1tagspost) | タグの作成 | 必須 |
-| GET | [api/v1/tags/:tag_id/memos](#apiv1tagstag_idmemosget) | タグに紐づけられているメモの取得 | 必須 |
+| メソッド | URI                                                   | リソース                         | token必須か |
+| -------- | ----------------------------------------------------- | -------------------------------- | ----------- |
+| GET      | [api/v1/tags](#apiv1tagsget)                          | タグ一覧の取得                   | 必須        |
+| POST     | [api/v1/tags](#apiv1tagspost)                         | タグの作成                       | 必須        |
+| GET      | [api/v1/tags/:tag_id/memos](#apiv1tagstag_idmemosget) | タグに紐づけられているメモの取得 | 必須        |
 
 
 ## api/v1/tags(GET)

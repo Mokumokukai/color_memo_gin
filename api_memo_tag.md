@@ -1,8 +1,8 @@
 # memo_tags
-| メソッド | URI | リソース | token必須か |
-| - | - | - | - |
-| POST | api/v1/memos/:memo_id/tags |　色メモにタグ追加 | 必要 |
-| POST | api/v1/memos/:memo_id/tags/:tag_id/delete | メモに紐づけられているタグの削除 | 必須 |
+| メソッド | URI                                       | リソース                         | token必須か |
+| -------- | ----------------------------------------- | -------------------------------- | ----------- |
+| POST     | api/v1/memos/:memo_id/tags                | 色メモにタグ追加                 | 必要        |
+| POST     | api/v1/memos/:memo_id/tags/:tag_id/delete | メモに紐づけられているタグの削除 | 必須        |
 
 
 ##  api/v1/memos/:memo_id/tags

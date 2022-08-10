@@ -1,12 +1,12 @@
 
 # users
-| メソッド | URI | リソース | token必須か |
-| - | - | - | - |
-| GET | [api/v1/users](#apiv1users) | ユーザ一覧 | 不要 |
-| GET | [api/v1/users/:user_id/memos](#apiv1usersuser_idmemos) | ユーザのメモ一覧 | 不要 |
+| メソッド | URI                                                    | リソース         | token必須か |
+| -------- | ------------------------------------------------------ | ---------------- | ----------- |
+| GET      | [api/v1/users](#apiv1users)                            | ユーザ一覧       | 不要        |
+| GET      | [api/v1/users/:user_id/memos](#apiv1usersuser_idmemos) | ユーザのメモ一覧 | 不要        |
 
 
-# api/v1/users
+## api/v1/users
 <details>
 <summary>ユーザ一覧</summary>
 

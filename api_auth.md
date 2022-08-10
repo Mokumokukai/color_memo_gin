@@ -1,8 +1,8 @@
 # Auth
-| メソッド | URI | リソース | 
-| - | - | - |
-| POST | api/v1/auth/signup | サインアップ | 
-| POST | api/v1/auth/login |　ログイン |
+| メソッド | URI                | リソース     |
+| -------- | ------------------ | ------------ |
+| POST     | api/v1/auth/signup | サインアップ |
+| POST     | api/v1/auth/login  | ログイン     |
 
 
 ## api/v1/auth/signup
