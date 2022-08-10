@@ -18,7 +18,7 @@
 
 
 
-[色メモ関連](./api_memos.md)
+[色メモ関連](./api_memoぎt.md)
 
 ## memo_tags
 | メソッド | URI                                       | リソース                         | token必須か |
