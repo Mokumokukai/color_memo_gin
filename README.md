@@ -24,13 +24,14 @@ docker-compose exec go ash
 | POST | api/v1/memos/:memo_id/edit | 色メモの編集 | 必要 |
 | POST | api/v1/memos/:memo_id/delete | 色メモの削除 | 必要 |
 | POST | api/v1/memos/:memo_id/duplicate | 色メモの複製 | 必要 |
-
+[色メモ関連](./api_memos.md)
 
 ## memo_tags
 | メソッド | URI | リソース | token必須か |
 | - | - | - | - |
 | POST | api/v1/memos/:memo_id/tags |　色メモにタグ追加 | 必要 |
 | POST | api/v1/memos/:memo_id/tags/:tag_id/delete | メモに紐づけられているタグの削除 | 必須 |
+[メモタグ関連](./api_memo_tag.md)
 
 
 ## tags
@@ -41,7 +42,6 @@ docker-compose exec go ash
 | GET | api/v1/tags/:tag_id/memos | タグに紐づけられているメモの取得 | 必須 |
 | POST | api/v1/tags/:tag_id/edit | タグ名の変更（実装検討中) | 不要 |
 | POST | api/v1/tags/:tag_id/delete | タグ名の削除（実装検討中) | 必須 |
-
 
 ## users
 | メソッド | URI | リソース | token必須か |
@@ -61,8 +61,10 @@ docker-compose exec go ash
 
 
 # API 設計詳細
-[色メモ関連](./api_memos.md)
+- [色メモ関連](./api_memos.md)
 
+
+- [メモタグ関連](./api_memo_tag.md)
 
 ## tags
 
