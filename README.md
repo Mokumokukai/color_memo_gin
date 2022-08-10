@@ -55,23 +55,17 @@ docker-compose exec go ash
 | - | - | - | - |
 | GET | api/v1/users | ユーザ一覧 | 不要 |
 | GET | api/v1/users/:user_id/memos | ユーザのメモ一覧 | 不要 |
-| GET | api/v1/users/:user_id/memos/:memo_id |　色メモの詳細 | 不要 |
-
+[ユーザ関連](./api_user.md)
 ## Auth
 | メソッド | URI | リソース | 
 | - | - | - |
 | POST | api/v1/auth/signup | サインアップ | 
 | POST | api/v1/auth/login |　ログイン |
-
+[ユーザ認証関連](./api_auth.md)
 
 --------------------------------------------------------------------
 
 
-# API 設計詳細
-- [色メモ関連](./api_memos.md)
-
-
-- [メモタグ関連](./api_memo_tag.md)
 
 ## tags
 
