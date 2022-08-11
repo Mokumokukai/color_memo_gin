@@ -26,7 +26,10 @@ func NewRouting(db *DB, reg registry.IInteractor) *Routing {
 
 func (r *Routing) setRouting(reg registry.IInteractor) {
 	uh := reg.NewUserHandler()
+	mh := reg.NewColorMemoHandler()
 	r.Gin.GET("/users", uh.GetUsers())
+	r.Gin.GET("/memos", mh.GetColorMemos())
+
 }
 
 func (r *Routing) Run() {
