@@ -2,7 +2,7 @@ package models
 
 type Tag struct {
 	ID          string
-	TagName     string
+	Name        string
 	TagID       string
 	ColorMemoID string
 }
