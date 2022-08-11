@@ -3,18 +3,18 @@ package controllers
 //依存性の注入
 import (
 	"github.com/Mokumokukai/color_memo_gin/src/models"
-	"github.com/Mokumokukai/color_memo_gin/src/usecase"
+	"github.com/Mokumokukai/color_memo_gin/src/usecase/service"
 )
 
 type userController struct {
-	userService usecase.IUserService
+	userService service.IUserService
 }
 
 type IUserController interface {
 	GetUsers() ([]*models.User, error)
 }
 
-func NewUserController(service usecase.IUserService) IUserController {
+func NewUserController(service service.IUserService) IUserController {
 	return &userController{service}
 }
 

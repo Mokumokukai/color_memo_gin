@@ -1,9 +1,12 @@
 package registry
 
 import (
+	"github.com/Mokumokukai/color_memo_gin/src/adaptor/presenters"
+	"github.com/Mokumokukai/color_memo_gin/src/infrastructure/datastore"
 	"github.com/Mokumokukai/color_memo_gin/src/infrastructure/handler"
-	"github.com/Mokumokukai/color_memo_gin/src/infrastructure/repository"
-	"github.com/Mokumokukai/color_memo_gin/src/usecase"
+	"github.com/Mokumokukai/color_memo_gin/src/usecase/presenter"
+	"github.com/Mokumokukai/color_memo_gin/src/usecase/repository"
+	"github.com/Mokumokukai/color_memo_gin/src/usecase/service"
 
 	"github.com/Mokumokukai/color_memo_gin/src/adaptor/controllers"
 	"gorm.io/gorm"
@@ -29,13 +32,13 @@ func (interactor *userInteractor) NewUserController() controllers.IUserControlle
 	return controllers.NewUserController(interactor.NewUserService())
 }
 
-func (interactor *userInteractor) NewUserService() usecase.IUserService {
-	return usecase.NewUserService(interactor.NewUserRepository(), interactor.NewUserPresenter())
+func (interactor *userInteractor) NewUserService() service.IUserService {
+	return service.NewUserService(interactor.NewUserRepository(), interactor.NewUserPresenter())
 }
-func (interactor *userInteractor) NewUserRepository() usecase.IUserRepository {
-	return repository.NewUserRepository(interactor.conn)
+func (interactor *userInteractor) NewUserRepository() repository.IUserRepository {
+	return datastore.NewUserRepository(interactor.conn)
 }
 
-func (interactor *userInteractor) NewUserPresenter() usecase.IUserPresenter {
-	return usecase.NewUserPresenter()
+func (interactor *userInteractor) NewUserPresenter() presenter.IUserPresenter {
+	return presenters.NewUserPresenter()
 }

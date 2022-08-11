@@ -1,7 +1,7 @@
 package models
 
 type RelationShip struct {
-	ID          string
+	ID          string `gorm:"primary_key"`
 	FollowerID  string
 	FollowingID string
 }
