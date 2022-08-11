@@ -1,9 +1,9 @@
 package models
 
 type ColorMemo struct {
-	ID         string
-	CreaterID  string
-	OwnerID    string
-	ColorCode1 string
-	ColorCode2 string
+	ID        string
+	OwnerID   string
+	CreaterID string
+	Color1    string
+	Color2    string
 }

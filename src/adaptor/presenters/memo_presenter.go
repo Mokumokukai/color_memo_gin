@@ -14,8 +14,8 @@ func NewColorMemoPresenter() presenter.IColorMemoPresenter {
 
 func (memoPresenter *memoPresenter) ResponseColorMemos(memos []*models.ColorMemo) []*models.ColorMemo {
 	for _, v := range memos {
-		v.ColorCode1 = "#" + v.ColorCode1
-		v.ColorCode2 = "#" + v.ColorCode2
+		v.Color1 = "#" + v.Color1
+		v.Color2 = "#" + v.Color2
 	}
 	return memos
 }

@@ -4,7 +4,7 @@ BEGIN;
 CREATE TABLE IF NOT EXISTS memos(
     id CHAR (7) UNIQUE NOT NULL,
     owner_id CHAR (7) NOT NULL,
-    craeter_id CHAR (7),
+    creater_id CHAR (7),
     color1 CHAR (8) NOT NULL,
     color2 CHAR (8) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
