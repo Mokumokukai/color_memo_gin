@@ -1,7 +1,7 @@
 package models
 
 type Tag struct {
-	ID          string
+	ID          string `gorm:"primary_key"`
 	Name        string
 	ColorMemoID string
 }

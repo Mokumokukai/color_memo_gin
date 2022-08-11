@@ -6,4 +6,5 @@ import (
 
 type IColorMemoRepository interface {
 	GetAll(memos []*models.ColorMemo) ([]*models.ColorMemo, error)
+	Create(memo *models.ColorMemo) (*models.ColorMemo, error)
 }

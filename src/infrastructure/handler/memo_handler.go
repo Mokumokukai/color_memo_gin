@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"net/http"
+
 	"github.com/Mokumokukai/color_memo_gin/src/adaptor/controllers"
 	"github.com/Mokumokukai/color_memo_gin/src/models"
 	"github.com/gin-gonic/gin"
@@ -9,12 +11,19 @@ import (
 type memos_res struct {
 	Memos []*models.ColorMemo `json:"memos"`
 }
+type memo_res struct {
+	Memo *models.ColorMemo `json:"memo"`
+}
 type memoHandler struct {
 	memoController controllers.IColorMemoController
 }
 
 type IColorMemoHandler interface {
 	GetColorMemos() gin.HandlerFunc
+	CreateColorMemo() gin.HandlerFunc
+}
+type ReqColorMemo struct {
+	ColorMemo *models.ColorMemo `json:"memo"`
 }
 
 func NewColorMemoHandler(mc controllers.IColorMemoController) IColorMemoHandler {
@@ -29,5 +38,21 @@ func (handler *memoHandler) GetColorMemos() gin.HandlerFunc {
 			c.JSON(400, err)
 		}
 		c.JSON(200, memos_res{Memos: m})
+	}
+}
+
+func (handler *memoHandler) CreateColorMemo() gin.HandlerFunc {
+
+	return func(c *gin.Context) {
+		req_m := &ReqColorMemo{}
+		if err := c.Bind(req_m); err != nil {
+			c.JSON(http.StatusBadRequest, err)
+		}
+		//validate here
+		m, err := handler.memoController.CreateColorMemo(req_m.ColorMemo)
+		if err != nil {
+			c.JSON(400, err)
+		}
+		c.JSON(200, memo_res{Memo: m})
 	}
 }

@@ -29,6 +29,7 @@ func (r *Routing) setRouting(reg registry.IInteractor) {
 	mh := reg.NewColorMemoHandler()
 	r.Gin.GET("/users", uh.GetUsers())
 	r.Gin.GET("/memos", mh.GetColorMemos())
+	r.Gin.POST("/memos", mh.CreateColorMemo())
 
 }
 

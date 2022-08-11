@@ -12,6 +12,7 @@ type memoController struct {
 
 type IColorMemoController interface {
 	GetColorMemos() ([]*models.ColorMemo, error)
+	CreateColorMemo(memo *models.ColorMemo) (*models.ColorMemo, error)
 }
 
 func NewColorMemoController(service service.IColorMemoService) IColorMemoController {
@@ -21,6 +22,13 @@ func NewColorMemoController(service service.IColorMemoService) IColorMemoControl
 func (memoController *memoController) GetColorMemos() ([]*models.ColorMemo, error) {
 	memos := []*models.ColorMemo{}
 	res, err := memoController.memoService.GetAll(memos)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+func (memoController *memoController) CreateColorMemo(memo *models.ColorMemo) (*models.ColorMemo, error) {
+	res, err := memoController.memoService.Create(memo)
 	if err != nil {
 		return nil, err
 	}

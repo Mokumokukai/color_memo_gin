@@ -6,4 +6,5 @@ import (
 
 type IColorMemoPresenter interface {
 	ResponseColorMemos(memos []*models.ColorMemo) []*models.ColorMemo
+	ResponseColorMemo(memo *models.ColorMemo) *models.ColorMemo
 }

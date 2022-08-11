@@ -19,3 +19,8 @@ func (memoPresenter *memoPresenter) ResponseColorMemos(memos []*models.ColorMemo
 	}
 	return memos
 }
+func (memoPresenter *memoPresenter) ResponseColorMemo(memo *models.ColorMemo) *models.ColorMemo {
+	memo.Color1 = "#" + memo.Color1
+	memo.Color2 = "#" + memo.Color2
+	return memo
+}

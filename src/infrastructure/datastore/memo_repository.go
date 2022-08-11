@@ -23,3 +23,11 @@ func (memoRepository *memoRepository) GetAll(memos []*models.ColorMemo) ([]*mode
 	}
 	return memos, err
 }
+
+func (memoRepository *memoRepository) Create(memo *models.ColorMemo) (*models.ColorMemo, error) {
+	err := memoRepository.db.Table("memos").Create(&memo).Error
+	if err != nil {
+		return nil, fmt.Errorf("sql error", err)
+	}
+	return memo, err
+}

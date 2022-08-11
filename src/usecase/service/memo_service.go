@@ -13,6 +13,7 @@ type memoService struct {
 
 type IColorMemoService interface {
 	GetAll(memos []*models.ColorMemo) ([]*models.ColorMemo, error)
+	Create(memo *models.ColorMemo) (*models.ColorMemo, error)
 }
 
 func NewColorMemoService(repository repository.IColorMemoRepository, presentor presenter.IColorMemoPresenter) IColorMemoService {
@@ -24,4 +25,11 @@ func (service *memoService) GetAll(memos []*models.ColorMemo) ([]*models.ColorMe
 		return nil, err
 	}
 	return service.ColorMemoPresenter.ResponseColorMemos(res), nil
+}
+func (service *memoService) Create(memo *models.ColorMemo) (*models.ColorMemo, error) {
+	res, err := service.ColorMemoRepository.Create(memo)
+	if err != nil {
+		return nil, err
+	}
+	return service.ColorMemoPresenter.ResponseColorMemo(res), nil
 }

@@ -3,7 +3,7 @@ package models
 import "time"
 
 type ColorMemo struct {
-	ID        string    `json:"id"`
+	ID        string    `json:"id" gorm:"primary_key"`
 	OwnerID   string    `json:"owner_id"`
 	CreaterID string    `json:"creater_id"`
 	Color1    string    `json:"color1"`
