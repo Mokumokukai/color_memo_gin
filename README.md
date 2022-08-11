@@ -14,6 +14,14 @@ docker-compose up -d
 # コンテナに入る
 docker-compose exec go ash
 
+# migration
+## up
+migrate -path src/database/migrations -database ${DB_PATH} up 
+## down 
+migrate -path src/database/migrations -database ${DB_PATH} down
+## migration ファイル作成
+migrate create -ext sql -dir src/database/migrations -seq ```create_model```
+
 # API 設計
 
 ## color
