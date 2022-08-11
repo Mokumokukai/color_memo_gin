@@ -2,9 +2,13 @@ package handler
 
 import (
 	"github.com/Mokumokukai/color_memo_gin/src/adaptor/controllers"
+	"github.com/Mokumokukai/color_memo_gin/src/models"
 	"github.com/gin-gonic/gin"
 )
 
+type memos_res struct {
+	Memos []*models.ColorMemo `json:"memos"`
+}
 type memoHandler struct {
 	memoController controllers.IColorMemoController
 }
@@ -24,6 +28,6 @@ func (handler *memoHandler) GetColorMemos() gin.HandlerFunc {
 		if err != nil {
 			c.JSON(400, err)
 		}
-		c.JSON(200, m)
+		c.JSON(200, memos_res{Memos: m})
 	}
 }
