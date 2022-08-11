@@ -2,11 +2,13 @@ package registry
 
 import (
 	"github.com/Mokumokukai/color_memo_gin/src/adaptor/controllers"
+	"github.com/Mokumokukai/color_memo_gin/src/adaptor/presenters"
 	"github.com/Mokumokukai/color_memo_gin/src/infrastructure/datastore"
 	"github.com/Mokumokukai/color_memo_gin/src/infrastructure/handler"
 	"github.com/Mokumokukai/color_memo_gin/src/usecase/presenter"
 	"github.com/Mokumokukai/color_memo_gin/src/usecase/repository"
 	"github.com/Mokumokukai/color_memo_gin/src/usecase/service"
+
 	"gorm.io/gorm"
 )
 
@@ -38,5 +40,5 @@ func (interactor *memoInteractor) NewColorMemoRepository() repository.IColorMemo
 }
 
 func (interactor *memoInteractor) NewColorMemoPresenter() presenter.IColorMemoPresenter {
-	return presenter.NewColorMemoPresenter()
+	return presenters.NewColorMemoPresenter()
 }

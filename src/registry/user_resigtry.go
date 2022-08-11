@@ -1,6 +1,7 @@
 package registry
 
 import (
+	"github.com/Mokumokukai/color_memo_gin/src/adaptor/presenters"
 	"github.com/Mokumokukai/color_memo_gin/src/infrastructure/datastore"
 	"github.com/Mokumokukai/color_memo_gin/src/infrastructure/handler"
 	"github.com/Mokumokukai/color_memo_gin/src/usecase/presenter"
@@ -39,5 +40,5 @@ func (interactor *userInteractor) NewUserRepository() repository.IUserRepository
 }
 
 func (interactor *userInteractor) NewUserPresenter() presenter.IUserPresenter {
-	return presenter.NewUserPresenter()
+	return presenters.NewUserPresenter()
 }
