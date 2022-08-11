@@ -20,6 +20,10 @@ func NewColorMemoHandler(mc controllers.IColorMemoController) IColorMemoHandler 
 func (handler *memoHandler) GetColorMemos() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
-		c.JSON(200, "hello")
+		m, err := handler.memoController.GetColorMemos()
+		if err != nil {
+			c.JSON(400, err)
+		}
+		c.JSON(200, m)
 	}
 }
