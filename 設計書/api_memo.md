@@ -24,29 +24,29 @@
 ###　レスポンス
 ```
 {
-    "memos":{
-        [
-            {
-                "colors":{
-                    "color1":"#FFFFFF",
-                    "color2":"#000000"
-                },
-                "tags":{
-                    [{
-                        "モノクロ":"01GA3NHKCNQHE9WJTNR70WF2MX"
-                    },{
-                        "白黒":"01GA3NJKZXRH4CR7TT28HKS8XN"
-                    }]
-                },
-                "creater_id":"01GA3NKQ5VZE70FY5MRVPYRABY",
-                "owner_id":"01GA3NM3ETBHBP0SCXHB4TGYXB",
-                "created_at":"2022-07-14T02:40:00Z",
-                "updated_at":"2022-07-14T02:40:00Z",
-                "id":"01GA3NQ0B4NM2Z6HPW2K9R1DF6"
-            },
-
-        ]
-    }
+    "memos":[
+        {
+            "color1":"#000000",
+            "color2":"#FFFFFF",
+            "owner_id":"-HgND-k",
+            "craeter_id":"yJpTc4d",
+            "id":"byNWNoK",
+            "created_at": "2022-08-11T20:03:04.827Z",
+            "updated_at": "2022-08-11T20:03:04.827Z",
+            "tags":{
+                [
+                    {
+                        "id": "Qn5AuIK",
+                        "name": "モノクロ"
+                    }
+                    {
+                        "id": "1hQpW2c",
+                        "name": "モノクロ"
+                    }
+                ]
+            }
+        }
+    ]
 }
 ```
 
@@ -73,20 +73,18 @@
 ```
 {
     "memo":{
-        "colors":{
-            "color1":"#FFFFFF",
-            "color2":"#000000"
-        },
-        "tags":{
-            ["モノクロ","白黒"]
-        }
+        "color1":"#FFFFFF",
+        "color2":"#000000",
+        "tags":[
+            "ifFxSWn","hFYcyr_"
+        ]
     }
 }
 ```
 tagがない場合
 ```
 {
-    "colors":{
+    "memo":{
         "color1":"#FFFFFF",
         "color2":"#000000"
     }
@@ -102,21 +100,23 @@ color1, color2はサーバ側で名前順でソートする。
 ```
 {
     "memo":{
-        "color":{
-            "color1":"#000000",
-            "color2":"#FFFFFF"
-        },
-        "owner_id":"01GA0Y1R6F5HJ6AJVH2RWT863G",
-        "craeter_id":"01GA0Y1R6F5HJ6AJVH2RWT863G",
-        "id":"01GA0Y1WN23BYR1N4EDZNYBDH5",
-        "created_at":"2022-07-14T02:40:00Z",
-        "updated_at":"2022-07-14T02:40:00Z",
-        "tags":{
-            [
-                {"モノクロ":"01GA0Y2BBYCJFYY92T237Y17SX"},
-                {"白黒":"01GA0Y21VP47YFR89VX5MKNYVJ"}
-            ]
-        }
+        "color1":"#000000",
+        "color2":"#FFFFFF",
+        "owner_id":"-HgND-k",
+        "craeter_id":"-HgND-k",
+        "id":"byNWNoK",
+        "created_at": "2022-08-11T20:03:04.827Z",
+        "updated_at": "2022-08-11T20:03:04.827Z",
+        "tags":[
+            {
+                "id": "Qn5AuIK",
+                "name": "モノクロ"
+            }
+            {
+                "id": "1hQpW2c",
+                "name": "モノクロ"
+            }
+        ]
     }
 }
 ```
@@ -167,19 +167,20 @@ color1, color2はサーバ側で名前順でソートする。
 
 ```
 {
-    "color":{
+    "memo":{
         "color1":"#FFFFFF",
-        "color2":"#000000"
-    },
-    "tags":{
-        ["モノクロ","白黒"]
+        "color2":"#000000",
+        "tags":[
+            "ifFxSWn","hFYcyr_"
+        ]
     }
+
 }
 ```
 tagがない場合
 ```
 {
-    "color":{
+    "memo":{
         "color1":"#FFFFFF",
         "color2":"#000000"
     }
@@ -195,20 +196,22 @@ color1, color2はサーバ側で名前順でソートする。
 ```
 {
     "memo":{
-        "colors":{
-            "color1":"#000000",
-            "color2":"#FFFFFF"
-        },
-        "owner_id":"01JS2Z3NDEKCDS4RRFFQ69G5FAV",
-        "craeter_id":"01JS2Z3NDEKCDS4RRFFQ69G5FAV",
-        "id":"23SS2Z3NDEKCDS4RRFFQ69G5FAV",
-        "created_at":"2022-07-14T02:40:00Z",
-        "updated_at":"2022-07-14T02:40:00Z":
-    },
-    "tags":{
-        [
-            {"モノクロ":"01ARZ3NDEKTSV4RRFFQ69G5FAV"},
-            {"白黒":"02ARZ3NDBDTSV4RRFFQ69G5FAX"}
+        "color1":"#000000",
+        "color2":"#FFFFFF",
+        "owner_id":"CHte4Lj",
+        "craeter_id":"CHte4Lj",
+        "id":"bdaqr2D",
+        "created_at": "2022-08-11T20:03:04.827Z",
+        "updated_at": "2022-08-11T20:03:04.827Z",
+        "tags":[
+            {
+                "id": "Qn5AuIK",
+                "name": "モノクロ"
+            }
+            {
+                "id": "1hQpW2c",
+                "name": "モノクロ"
+            }
         ]
     }
 }
@@ -310,36 +313,37 @@ color1, color2はサーバ側で名前順でソートする。
 ```
 {
     "memo":{
-        "colors":{
-            "color1":"#000000",
-            "color2":"#FFFFFF"
-        },
-        "owner_id":"01GA0Y1R6F5HJ6AJVH2RWT863G",
-        "craeter_id":"01GA0Y1R6F5HJ6AJVH2RWT863G",
-        "id":"01GA0Y1WN23BYR1N4EDZNYBDH5",
-        "created_at":"2022-07-14T02:40:00Z",
-        "updated_at":"2022-07-14T02:40:00Z",
-        "tags":{
-            [
-                {"モノクロ":"01GA0Y2BBYCJFYY92T237Y17SX"},
-                {"白黒":"01GA0Y21VP47YFR89VX5MKNYVJ"}
-            ]
-        }
+        "color1":"#000000",
+        "color2":"#FFFFFF",
+        "owner_id":"-HgND-k",
+        "craeter_id":"yJpTc4d",
+        "id":"byNWNoK",
+        "created_at": "2022-08-11T20:03:04.827Z",
+        "updated_at": "2022-08-11T20:03:04.827Z",
+        "tags":[
+            {
+                "id": "Qn5AuIK",
+                "name": "モノクロ"
+            }
+            {
+                "id": "1hQpW2c",
+                "name": "モノクロ"
+            }
+        ]
     }
 }
 ```
 
 
-| パラメータ | 型           | 内容                                               |
-| ---------- | ------------ | -------------------------------------------------- |
-| color      | object       | ソートされた色の組み合わせと作成者などの情報を格納 |
-| color1     | string       | 順番が若い方の色                                   |
-| color2     | string       | 順番が若くない色                                   |
-| owner_id   | string       | 所持者id                                           |
-| creater_id | string       | 作成者id                                           |
-| created_at | string       | 作成日時                                           |
-| updated_at | string       | 更新日時                                           |
-| tags       | array_object | 登録したタグ情報の配列                             |
+| パラメータ | 型           | 内容                   |
+| ---------- | ------------ | ---------------------- |
+| color1     | string       | 順番が若い方の色       |
+| color2     | string       | 順番が若くない色       |
+| owner_id   | string       | 所持者id               |
+| creater_id | string       | 作成者id               |
+| created_at | string       | 作成日時               |
+| updated_at | string       | 更新日時               |
+| tags       | array_object | 登録したタグ情報の配列 |
 
 ### 失敗時
 - status code 409 (Conflict)

@@ -27,13 +27,12 @@
 
 ```
 {
-    "tags":{
-        [
-            {"モノクロ":"01ARZ3NDEKTSV4RRFFQ69G5FAV"},
-            {"白黒":"02ARZ3NDBDTSV4RRFFQ69G5FAX"},
-            {"ビビッド":"01GA138S72W3GTJPV4DD8G7YX4"}
-        ]
-    }
+    "tags": [
+        {
+            "id": "Qn5AuIK",
+            "name": "モノクロ"
+        }
+    ]
 }
 ```
 #### 注意点
@@ -49,8 +48,13 @@
 ### メソッド
 - POST
     - JSON(req,res)
-
-
+```
+{
+    "tag":{
+        "name":"モノクロ"
+    }
+}
+```
 ### レスポンス
 #### 成功時
  - ステータスコード　201 Created
@@ -59,8 +63,10 @@
 
 ```
 {
-    "tag":{
-        "モノクロ":"01ARZ3NDEKTSV4RRFFQ69G5FAV"
+    "tag":
+    {
+        "id": "Qn5AuIK",
+        "name": "モノクロ"
     }
 }
 ```
@@ -88,29 +94,25 @@
 
 ```
 {
-    "memos":{
-        [
-            {
-                "colors":{
-                    "color1":"#FFFFFF",
-                    "color2":"#000000"
-                },
-                "tags":{
-                    [{
-                        "モノクロ":"01GA3NHKCNQHE9WJTNR70WF2MX"
-                    },{
-                        "白黒":"01GA3NJKZXRH4CR7TT28HKS8XN"
-                    }]
-                },
-                "creater_id":"01GA3NKQ5VZE70FY5MRVPYRABY",
-                "owner_id":"01GA3NM3ETBHBP0SCXHB4TGYXB",
-                "created_at":"2022-07-14T02:40:00Z",
-                "updated_at":"2022-07-14T02:40:00Z",
-                "id":"01GA3NQ0B4NM2Z6HPW2K9R1DF6"
-            },
+    "memos":[
+        {
+            "color1":"#FFFFFF",
+            "color2":"#000000",
 
-        ]
-    }
+            "creater_id":"01GA3NKQ5VZE70FY5MRVPYRABY",
+            "owner_id":"01GA3NM3ETBHBP0SCXHB4TGYXB",
+            "created_at":"2022-07-14T02:40:00Z",
+            "updated_at":"2022-07-14T02:40:00Z",
+            "id":"01GA3NQ0B4NM2Z6HPW2K9R1DF6",
+            "tags": [
+                {
+                    "id": "Qn5AuIK",
+                    "name": "モノクロ"
+                }
+            ]
+        }
+    ]
+    
 }
 ```
 #### 注意点

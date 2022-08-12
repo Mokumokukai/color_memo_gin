@@ -1,9 +1,7 @@
 package models
 
 type User struct {
-	UserName   string
-	EMail      string
-	ScreenName string
-	HPassword  string
-	ID         string
+	ID   string `json:"id" gorm:"primary_key"`
+	UID  string `json:"-"`
+	Name string `json:"name"`
 }

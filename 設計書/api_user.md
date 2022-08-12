@@ -25,22 +25,22 @@
 
 ```
 {
-    "users":{[
+    "users":[
         {
             "name":"test1",
-            "id":"01GA3TZNS0B3Y4BFB134P6RNH0",
+            "id":"uOUDFFD",
             "created_at":"2022-07-14T02:40:00Z",
             "updated_at":"2022-07-14T02:40:00Z",
             "memo_num":5,
         },
         {
             "name":"test2",
-            "id":"01GA3V1FV9FFJHB1KDFJNTPQJ5",
+            "id":"TpsyDfW",
             "created_at":"2022-07-14T02:40:00Z",
             "updated_at":"2022-07-14T02:40:00Z",
             "memo_num":2,
         }
-    ]}
+    ]
 }
 ```
 
@@ -80,22 +80,19 @@
     "memos":{
         [
             {
-                "colors":{
-                    "color1":"#FFFFFF",
-                    "color2":"#000000"
-                },
-                "tags":{
-                    [{
-                        "モノクロ":"01GA3NHKCNQHE9WJTNR70WF2MX"
-                    },{
-                        "白黒":"01GA3NJKZXRH4CR7TT28HKS8XN"
-                    }]
-                },
+                "color1":"#FFFFFF",
+                "color2":"#000000",
+                "tags": [
+                    {
+                        "id": "Qn5AuIK",
+                        "name": "モノクロ"
+                    }
+                ],
                 "creater_id":"01GA3NKQ5VZE70FY5MRVPYRABY",
                 "owner_id":"01GA3NM3ETBHBP0SCXHB4TGYXB",
                 "created_at":"2022-07-14T02:40:00Z",
                 "updated_at":"2022-07-14T02:40:00Z",
-                "id":"01GA3NQ0B4NM2Z6HPW2K9R1DF6"
+                "id":"r4B6cWM"
             },
 
         ]

@@ -20,6 +20,10 @@ func NewUserHandler(uc controllers.IUserController) IUserHandler {
 func (handler *userHandler) GetUsers() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
-		c.JSON(200, "hello")
+		m, err := handler.userController.GetUsers()
+		if err != nil {
+			c.JSON(400, err)
+		}
+		c.JSON(200, m)
 	}
 }
