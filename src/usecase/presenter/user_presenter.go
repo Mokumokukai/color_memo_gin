@@ -8,4 +8,5 @@ import (
 
 type IUserPresenter interface {
 	ResponseUsers(users []*models.User) []*models.User
+	ResponseUser(user *models.User) *models.User
 }

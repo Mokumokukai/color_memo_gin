@@ -18,3 +18,6 @@ func (userPresenter *userPresenter) ResponseUsers(users []*models.User) []*model
 	}
 	return users
 }
+func (userPresenter *userPresenter) ResponseUser(user *models.User) *models.User {
+	return user
+}
