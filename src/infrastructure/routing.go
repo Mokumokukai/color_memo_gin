@@ -1,7 +1,9 @@
 package infrastructure
 
 import (
+	"github.com/Mokumokukai/color_memo_gin/src/infrastructure/middleware"
 	"github.com/Mokumokukai/color_memo_gin/src/registry"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -28,6 +30,8 @@ func (r *Routing) setRouting(reg registry.IInteractor) {
 	uh := reg.NewUserHandler()
 	mh := reg.NewColorMemoHandler()
 	th := reg.NewTagHandler()
+	jwtm := middleware.NewJWTMiddlwareHandler("/go/src/firebase-adminsdk.json", "color-memo-auth")
+	r.Gin.Use(jwtm.SetJWTToken())
 	r.Gin.GET("/users", uh.GetUsers())
 	r.Gin.GET("/memos", mh.GetColorMemos())
 	r.Gin.POST("/memos", mh.CreateColorMemo())
