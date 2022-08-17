@@ -1,8 +1,12 @@
 package handler
 
 import (
+	"net/http"
+
 	"github.com/Mokumokukai/color_memo_gin/src/adaptor/controllers"
+	"github.com/Mokumokukai/color_memo_gin/src/models"
 	"github.com/gin-gonic/gin"
+	gonanoid "github.com/matoous/go-nanoid/v2"
 )
 
 type userHandler struct {
@@ -12,6 +16,9 @@ type userHandler struct {
 type IUserHandler interface {
 	GetUsers() gin.HandlerFunc
 	Register() gin.HandlerFunc
+}
+type ReqSignup struct {
+	Name string `json:"name"`
 }
 
 func NewUserHandler(uc controllers.IUserController) IUserHandler {
@@ -32,10 +39,19 @@ func (handler *userHandler) GetUsers() gin.HandlerFunc {
 func (handler *userHandler) Register() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
-		m, err := handler.userController.Register()
+		req_u := &ReqSignup{}
+		if err := c.Bind(req_u); err != nil {
+			c.JSON(http.StatusBadRequest, err)
+		}
+		var user models.User
+		user.ID, _ = gonanoid.New(7)
+		user.Name = req_u.Name
+		uid, _ := c.Get("UID")
+		user.UID, _ = uid.(string)
+		u, err := handler.userController.Register(&user)
 		if err != nil {
 			c.JSON(400, err)
 		}
-		c.JSON(200, m)
+		c.JSON(200, u)
 	}
 }

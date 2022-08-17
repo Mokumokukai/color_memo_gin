@@ -12,7 +12,7 @@ type userController struct {
 
 type IUserController interface {
 	GetUsers() ([]*models.User, error)
-	Register() (*models.User, error)
+	Register(user *models.User) (*models.User, error)
 }
 
 func NewUserController(service service.IUserService) IUserController {
@@ -28,8 +28,7 @@ func (userController *userController) GetUsers() ([]*models.User, error) {
 	return res, nil
 }
 
-func (userController *userController) Register() (*models.User, error) {
-	user := *&models.User{}
+func (userController *userController) Register(user *models.User) (*models.User, error) {
 	res, err := userController.userService.Register(user)
 	if err != nil {
 		return nil, err

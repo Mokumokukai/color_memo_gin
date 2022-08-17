@@ -24,7 +24,7 @@ func (userRepository *userRepository) GetAll(users []*models.User) ([]*models.Us
 	return users, err
 }
 func (userRepository *userRepository) Register(user *models.User) (*models.User, error) {
-	err := userRepository.db.Find(&user).Error
+	err := userRepository.db.Create(&user).Error
 	if err != nil {
 		return nil, fmt.Errorf("sql error", err)
 	}

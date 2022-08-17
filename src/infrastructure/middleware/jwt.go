@@ -56,7 +56,6 @@ func (handler *jwtMiddlewareHandler) SetJWTToken() gin.HandlerFunc {
 			return
 
 		}
-		log.Printf("Verified ID token: %v\n", token)
 		c.Set("UID", token.UID)
 		c.Next()
 	}

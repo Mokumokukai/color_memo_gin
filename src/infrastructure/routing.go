@@ -32,6 +32,7 @@ func (r *Routing) setRouting(reg registry.IInteractor) {
 	th := reg.NewTagHandler()
 	jwtm := middleware.NewJWTMiddlwareHandler("/go/src/firebase-adminsdk.json", "color-memo-auth")
 	r.Gin.Use(jwtm.SetJWTToken())
+	r.Gin.POST("/auth/signup", uh.Register())
 	r.Gin.GET("/users", uh.GetUsers())
 	r.Gin.GET("/memos", mh.GetColorMemos())
 	r.Gin.POST("/memos", mh.CreateColorMemo())
