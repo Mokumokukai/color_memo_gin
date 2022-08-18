@@ -1,5 +1,7 @@
 .env
+firebase-adminsdk.json
 tmp/
+main
 # Created by https://www.toptal.com/developers/gitignore/api/macos,go
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,go
 
@@ -64,3 +66,4 @@ Temporary Items
 *.icloud
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,go
+

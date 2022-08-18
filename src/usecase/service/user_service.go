@@ -13,6 +13,7 @@ type userService struct {
 
 type IUserService interface {
 	GetAll(users []*models.User) ([]*models.User, error)
+	Register(user *models.User) (*models.User, error)
 }
 
 func NewUserService(repository repository.IUserRepository, presentor presenter.IUserPresenter) IUserService {
@@ -24,4 +25,11 @@ func (service *userService) GetAll(users []*models.User) ([]*models.User, error)
 		return nil, err
 	}
 	return service.UserPresenter.ResponseUsers(res), nil
+}
+func (service *userService) Register(user *models.User) (*models.User, error) {
+	res, err := service.UserRepository.Register(user)
+	if err != nil {
+		return nil, err
+	}
+	return service.UserPresenter.ResponseUser(res), nil
 }

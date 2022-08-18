@@ -6,4 +6,5 @@ import (
 
 type IUserRepository interface {
 	GetAll(users []*models.User) ([]*models.User, error)
+	Register(user *models.User) (*models.User, error)
 }
