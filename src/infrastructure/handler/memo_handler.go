@@ -51,8 +51,11 @@ func (handler *memoHandler) CreateColorMemo() gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, err)
 		}
 		//validate here
+		user_id, _ := c.Get("user_id")
 		req_m.ColorMemo.ID, _ = gonanoid.New(7)
+		req_m.ColorMemo.CreaterID, _ = user_id.(string)
 		req_m.ColorMemo.OwnerID = req_m.ColorMemo.CreaterID
+
 		m, err := handler.memoController.CreateColorMemo(req_m.ColorMemo)
 		if err != nil {
 			c.JSON(400, err)
