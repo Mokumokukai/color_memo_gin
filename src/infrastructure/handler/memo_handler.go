@@ -23,6 +23,9 @@ type memoHandler struct {
 type IColorMemoHandler interface {
 	GetColorMemos() gin.HandlerFunc
 	CreateColorMemo() gin.HandlerFunc
+	DuplicateColorMemo() gin.HandlerFunc
+	DeleteColorMemo() gin.HandlerFunc
+	EditColorMemo() gin.HandlerFunc
 }
 type ReqColorMemo struct {
 	ColorMemo *models.ColorMemo `json:"memo"`
@@ -57,6 +60,68 @@ func (handler *memoHandler) CreateColorMemo() gin.HandlerFunc {
 		req_m.ColorMemo.OwnerID = req_m.ColorMemo.CreaterID
 
 		m, err := handler.memoController.CreateColorMemo(req_m.ColorMemo)
+		if err != nil {
+			c.JSON(400, err)
+		}
+		c.JSON(200, memo_res{Memo: m})
+	}
+}
+
+func (handler *memoHandler) DuplicateColorMemo() gin.HandlerFunc {
+
+	return func(c *gin.Context) {
+		req_m := &ReqColorMemo{}
+		if err := c.Bind(req_m); err != nil {
+			c.JSON(http.StatusBadRequest, err)
+		}
+		//validate here
+		user_id, _ := c.Get("user_id")
+		req_m.ColorMemo.ID, _ = gonanoid.New(7)
+		req_m.ColorMemo.CreaterID, _ = user_id.(string)
+		req_m.ColorMemo.OwnerID = req_m.ColorMemo.CreaterID
+
+		m, err := handler.memoController.DuplicateColorMemo(req_m.ColorMemo)
+		if err != nil {
+			c.JSON(400, err)
+		}
+		c.JSON(200, memo_res{Memo: m})
+	}
+}
+func (handler *memoHandler) DeleteColorMemo() gin.HandlerFunc {
+
+	return func(c *gin.Context) {
+		req_m := &ReqColorMemo{}
+		if err := c.Bind(req_m); err != nil {
+			c.JSON(http.StatusBadRequest, err)
+		}
+		//validate here
+		user_id, _ := c.Get("user_id")
+		req_m.ColorMemo.ID, _ = gonanoid.New(7)
+		req_m.ColorMemo.CreaterID, _ = user_id.(string)
+		req_m.ColorMemo.OwnerID = req_m.ColorMemo.CreaterID
+
+		err := handler.memoController.DeleteColorMemo(req_m.ColorMemo)
+		if err != nil {
+			c.JSON(400, err)
+		}
+		c.JSON(200, "")
+	}
+}
+
+func (handler *memoHandler) EditColorMemo() gin.HandlerFunc {
+
+	return func(c *gin.Context) {
+		req_m := &ReqColorMemo{}
+		if err := c.Bind(req_m); err != nil {
+			c.JSON(http.StatusBadRequest, err)
+		}
+		//validate here
+		user_id, _ := c.Get("user_id")
+		req_m.ColorMemo.ID, _ = gonanoid.New(7)
+		req_m.ColorMemo.CreaterID, _ = user_id.(string)
+		req_m.ColorMemo.OwnerID = req_m.ColorMemo.CreaterID
+
+		m, err := handler.memoController.EditColorMemo(req_m.ColorMemo)
 		if err != nil {
 			c.JSON(400, err)
 		}

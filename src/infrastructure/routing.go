@@ -39,6 +39,7 @@ func (r *Routing) setRouting(reg registry.IInteractor) {
 
 	r.Gin.Use(jwtm.SetUserID())
 	r.Gin.POST("/memos", mh.CreateColorMemo())
+	r.Gin.POST("/memos", mh.DuplicateColorMemo())
 	r.Gin.POST("/tags", th.CreateTag())
 
 }

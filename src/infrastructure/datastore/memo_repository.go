@@ -31,3 +31,24 @@ func (memoRepository *memoRepository) Create(memo *models.ColorMemo) (*models.Co
 	}
 	return memo, err
 }
+func (memoRepository *memoRepository) Duplicate(memo *models.ColorMemo) (*models.ColorMemo, error) {
+	err := memoRepository.db.Table("memos").Create(&memo).Error
+	if err != nil {
+		return nil, fmt.Errorf("sql error", err)
+	}
+	return memo, err
+}
+func (memoRepository *memoRepository) Delete(memo *models.ColorMemo) error {
+	err := memoRepository.db.Table("memos").Create(&memo).Error
+	if err != nil {
+		return fmt.Errorf("sql error", err)
+	}
+	return err
+}
+func (memoRepository *memoRepository) Edit(memo *models.ColorMemo) (*models.ColorMemo, error) {
+	err := memoRepository.db.Table("memos").Create(&memo).Error
+	if err != nil {
+		return nil, fmt.Errorf("sql error", err)
+	}
+	return memo, err
+}
