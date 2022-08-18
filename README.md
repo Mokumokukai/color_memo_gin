@@ -6,7 +6,8 @@ MYSQL_DATABASE=
 MYSQL_USER=
 MYSQL_PASSWORD=
 ```
-
+# firebasetoken.jsonの配置
+jwtの署名を確認するために```firebase-adminsdk.json```をmain.goと同じディレクトリに移動してください。
 # build
 docker-compose build
 
