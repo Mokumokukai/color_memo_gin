@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
 	gonanoid "github.com/matoous/go-nanoid/v2"
@@ -62,7 +63,7 @@ func (handler *memoHandler) CreateColorMemo() gin.HandlerFunc {
 
 		m, err := handler.memoController.CreateColorMemo(req_m.ColorMemo)
 		if err != nil {
-			c.JSON(400, err)
+			c.JSON(400, err.Error())
 			return
 		}
 		c.JSON(200, memo_res{Memo: m})
@@ -80,7 +81,7 @@ func (handler *memoHandler) DuplicateColorMemo() gin.HandlerFunc {
 
 		m, err := handler.memoController.DuplicateColorMemo(c.Param("memo_id"), memo)
 		if err != nil {
-			c.JSON(400, err)
+			c.JSON(400, err.Error())
 			return
 		}
 		c.JSON(200, memo_res{Memo: m})
@@ -100,7 +101,7 @@ func (handler *memoHandler) DeleteColorMemo() gin.HandlerFunc {
 		err := handler.memoController.DeleteColorMemo(&memo)
 		//TODO: errにエラー定義したエラーを入れるようにする
 		if err != nil {
-			c.JSON(http.StatusUnauthorized, err)
+			c.JSON(http.StatusUnauthorized, err.Error())
 			return
 		}
 		c.JSON(http.StatusNoContent, "")
@@ -122,7 +123,8 @@ func (handler *memoHandler) EditColorMemo() gin.HandlerFunc {
 
 		m, err := handler.memoController.EditColorMemo(req_m.ColorMemo)
 		if err != nil {
-			c.JSON(http.StatusUnauthorized, err)
+			fmt.Println(err)
+			c.JSON(http.StatusForbidden, err.Error())
 			return
 		}
 		c.JSON(http.StatusOK, memo_res{Memo: m})
