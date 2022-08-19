@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Mokumokukai/color_memo_gin/src/utils"
-
 	"github.com/Mokumokukai/color_memo_gin/src/adaptor/controllers"
+	"github.com/Mokumokukai/color_memo_gin/src/infrastructure/validators"
 	"github.com/Mokumokukai/color_memo_gin/src/models"
+	"github.com/Mokumokukai/color_memo_gin/src/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -51,17 +51,25 @@ func (handler *memoHandler) GetColorMemos() gin.HandlerFunc {
 func (handler *memoHandler) CreateColorMemo() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
-		req_m := &ReqColorMemo{}
-		if err := c.Bind(req_m); err != nil {
-			c.JSON(http.StatusBadRequest, err)
+		//body部分のバリデーション
+		b_bid := &validators.ColorMemoValidator{}
+		if err := c.Bind(b_bid); err != nil {
+			c.JSON(http.StatusBadRequest, err.Error())
+			return
 		}
-		//validate here
-		user_id, _ := c.Get("user_id")
-		req_m.ColorMemo.ID, _ = utils.AlphaNumNanoID(7)
-		req_m.ColorMemo.CreaterID, _ = user_id.(string)
-		req_m.ColorMemo.OwnerID = req_m.ColorMemo.CreaterID
 
-		m, err := handler.memoController.CreateColorMemo(req_m.ColorMemo)
+		user_id, _ := c.Get("user_id")
+		id, _ := utils.AlphaNumNanoID(7)
+		creater_id, _ := user_id.(string)
+		var color_memo = &models.ColorMemo{
+			ID:        id,
+			CreaterID: creater_id,
+			OwnerID:   creater_id,
+			Color1:    b_bid.ColorMemo.Color1[1:],
+			Color2:    b_bid.ColorMemo.Color2[1:],
+		}
+		fmt.Println(color_memo)
+		m, err := handler.memoController.CreateColorMemo(color_memo)
 		if err != nil {
 			c.JSON(400, err.Error())
 			return
@@ -73,13 +81,19 @@ func (handler *memoHandler) CreateColorMemo() gin.HandlerFunc {
 func (handler *memoHandler) DuplicateColorMemo() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
+		//uriをバリデーション :memo_idにalphanum以外が入らないように
+		uri_bid := &validators.MemoIDParams{}
+		if err := c.ShouldBindUri(uri_bid); err != nil {
+			c.JSON(http.StatusBadRequest, err.Error())
+			return
+		}
+
 		memo := &models.ColorMemo{}
-		//validate here
 		user_id, _ := c.Get("user_id")
 		memo.ID, _ = utils.AlphaNumNanoID(7)
 		memo.OwnerID, _ = user_id.(string)
 
-		m, err := handler.memoController.DuplicateColorMemo(c.Param("memo_id"), memo)
+		m, err := handler.memoController.DuplicateColorMemo(uri_bid.MemoID, memo)
 		if err != nil {
 			c.JSON(400, err.Error())
 			return
@@ -92,11 +106,17 @@ func (handler *memoHandler) DuplicateColorMemo() gin.HandlerFunc {
 func (handler *memoHandler) DeleteColorMemo() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
+		//uriをバリデーション :memo_idにalphanum以外が入らないように
+		uri_bid := &validators.MemoIDParams{}
+		if err := c.ShouldBindUri(uri_bid); err != nil {
+			c.JSON(http.StatusBadRequest, err.Error())
+			return
+		}
+
 		memo := models.ColorMemo{}
-		//validate here
 		user_id, _ := c.Get("user_id")
 		memo.OwnerID, _ = user_id.(string)
-		memo.ID = c.Param("memo_id")
+		memo.ID = uri_bid.MemoID
 
 		err := handler.memoController.DeleteColorMemo(&memo)
 		//TODO: errにエラー定義したエラーを入れるようにする
@@ -112,16 +132,29 @@ func (handler *memoHandler) DeleteColorMemo() gin.HandlerFunc {
 func (handler *memoHandler) EditColorMemo() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
-		req_m := &ReqColorMemo{}
-		if err := c.Bind(req_m); err != nil {
-			c.JSON(http.StatusBadRequest, err)
+		//body部分のバリデーション
+		b_bid := &validators.ColorMemoValidator{}
+		if err := c.Bind(b_bid); err != nil {
+			c.JSON(http.StatusBadRequest, err.Error())
+			return
 		}
-		//validate here
-		user_id, _ := c.Get("user_id")
-		req_m.ColorMemo.ID = c.Param("memo_id")
-		req_m.ColorMemo.OwnerID, _ = user_id.(string)
 
-		m, err := handler.memoController.EditColorMemo(req_m.ColorMemo)
+		uri_bid := &validators.MemoIDParams{}
+		if err := c.ShouldBindUri(uri_bid); err != nil {
+			c.JSON(http.StatusBadRequest, err.Error())
+			return
+		}
+
+		user_id_, _ := c.Get("user_id")
+		user_id, _ := user_id_.(string)
+		var color_memo = &models.ColorMemo{
+			ID:      uri_bid.MemoID,
+			OwnerID: user_id,
+			Color1:  b_bid.ColorMemo.Color1[1:],
+			Color2:  b_bid.ColorMemo.Color2[1:],
+		}
+
+		m, err := handler.memoController.EditColorMemo(color_memo)
 		if err != nil {
 			fmt.Println(err)
 			c.JSON(http.StatusForbidden, err.Error())

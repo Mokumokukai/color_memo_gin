@@ -1,4 +1,4 @@
-package valdators
+package validators
 
 type UserModelValidator struct {
 	User struct {

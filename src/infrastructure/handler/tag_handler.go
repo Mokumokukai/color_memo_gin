@@ -46,6 +46,7 @@ func (handler *tagHandler) CreateTag() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
 		req_t := &ReqTag{}
+
 		if err := c.Bind(req_t); err != nil {
 			c.JSON(http.StatusBadRequest, err)
 		}
