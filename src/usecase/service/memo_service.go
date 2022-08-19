@@ -14,7 +14,7 @@ type memoService struct {
 type IColorMemoService interface {
 	GetAll(memos []*models.ColorMemo) ([]*models.ColorMemo, error)
 	Create(memo *models.ColorMemo) (*models.ColorMemo, error)
-	Duplicate(memo *models.ColorMemo) (*models.ColorMemo, error)
+	Duplicate(memo_id string, memo *models.ColorMemo) (*models.ColorMemo, error)
 	Delete(memo *models.ColorMemo) error
 	Edit(memo *models.ColorMemo) (*models.ColorMemo, error)
 }
@@ -36,9 +36,8 @@ func (service *memoService) Create(memo *models.ColorMemo) (*models.ColorMemo, e
 	}
 	return service.ColorMemoPresenter.ResponseColorMemo(res), nil
 }
-
-func (service *memoService) Duplicate(memo *models.ColorMemo) (*models.ColorMemo, error) {
-	res, err := service.ColorMemoRepository.Duplicate(memo)
+func (service *memoService) Duplicate(memo_id string, memo *models.ColorMemo) (*models.ColorMemo, error) {
+	res, err := service.ColorMemoRepository.Duplicate(memo_id, memo)
 	if err != nil {
 		return nil, err
 	}

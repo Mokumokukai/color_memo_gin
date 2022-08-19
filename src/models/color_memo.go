@@ -8,6 +8,6 @@ type ColorMemo struct {
 	CreaterID string    `json:"creater_id"`
 	Color1    string    `json:"color1" binding:"required"`
 	Color2    string    `json:"color2" binding:"required"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	CreatedAt time.Time `json:"created_at" gorm:"->"`
+	UpdatedAt time.Time `json:"updated_at" gorm:"->"`
 }

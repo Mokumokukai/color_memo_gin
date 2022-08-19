@@ -13,9 +13,8 @@ type memoController struct {
 type IColorMemoController interface {
 	GetColorMemos() ([]*models.ColorMemo, error)
 	CreateColorMemo(memo *models.ColorMemo) (*models.ColorMemo, error)
-	DuplicateColorMemo(memo *models.ColorMemo) (*models.ColorMemo, error)
+	DuplicateColorMemo(memo_id string, memo *models.ColorMemo) (*models.ColorMemo, error)
 	DeleteColorMemo(memo *models.ColorMemo) error
-
 	EditColorMemo(memo *models.ColorMemo) (*models.ColorMemo, error)
 }
 
@@ -38,8 +37,8 @@ func (memoController *memoController) CreateColorMemo(memo *models.ColorMemo) (*
 	}
 	return res, nil
 }
-func (memoController *memoController) DuplicateColorMemo(memo *models.ColorMemo) (*models.ColorMemo, error) {
-	res, err := memoController.memoService.Duplicate(memo)
+func (memoController *memoController) DuplicateColorMemo(memo_id string, memo *models.ColorMemo) (*models.ColorMemo, error) {
+	res, err := memoController.memoService.Duplicate(memo_id, memo)
 	if err != nil {
 		return nil, err
 	}
