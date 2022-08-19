@@ -6,3 +6,6 @@ type ColorMemoValidator struct {
 		Color2 string `json:"color2" binding:"required,rgba"`
 	}
 }
+type MemoIDParams struct {
+	MemoID string `url:"memo_id" binding:"required,alphanum,len=7"`
+}

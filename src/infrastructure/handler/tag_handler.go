@@ -5,8 +5,8 @@ import (
 
 	"github.com/Mokumokukai/color_memo_gin/src/adaptor/controllers"
 	"github.com/Mokumokukai/color_memo_gin/src/models"
+	"github.com/Mokumokukai/color_memo_gin/src/utils"
 	"github.com/gin-gonic/gin"
-	gonanoid "github.com/matoous/go-nanoid/v2"
 )
 
 type tags_res struct {
@@ -50,7 +50,7 @@ func (handler *tagHandler) CreateTag() gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, err)
 		}
 		//validate here
-		req_t.Tag.ID, _ = gonanoid.New(7)
+		req_t.Tag.ID, _ = utils.AlphaNumNanoID(7)
 		t, err := handler.tagController.CreateTag(req_t.Tag)
 		if err != nil {
 			c.JSON(400, err)

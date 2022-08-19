@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	gonanoid "github.com/matoous/go-nanoid/v2"
+	"github.com/Mokumokukai/color_memo_gin/src/utils"
 
 	"github.com/Mokumokukai/color_memo_gin/src/adaptor/controllers"
 	"github.com/Mokumokukai/color_memo_gin/src/models"
@@ -57,7 +57,7 @@ func (handler *memoHandler) CreateColorMemo() gin.HandlerFunc {
 		}
 		//validate here
 		user_id, _ := c.Get("user_id")
-		req_m.ColorMemo.ID, _ = gonanoid.New(7)
+		req_m.ColorMemo.ID, _ = utils.AlphaNumNanoID(7)
 		req_m.ColorMemo.CreaterID, _ = user_id.(string)
 		req_m.ColorMemo.OwnerID = req_m.ColorMemo.CreaterID
 
@@ -76,7 +76,7 @@ func (handler *memoHandler) DuplicateColorMemo() gin.HandlerFunc {
 		memo := &models.ColorMemo{}
 		//validate here
 		user_id, _ := c.Get("user_id")
-		memo.ID, _ = gonanoid.New(7)
+		memo.ID, _ = utils.AlphaNumNanoID(7)
 		memo.OwnerID, _ = user_id.(string)
 
 		m, err := handler.memoController.DuplicateColorMemo(c.Param("memo_id"), memo)
