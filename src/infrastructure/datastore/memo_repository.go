@@ -17,7 +17,6 @@ func NewColorMemoRepository(db *gorm.DB) repository.IColorMemoRepository {
 }
 
 func (memoRepository *memoRepository) GetAll(memos []*models.ColorMemo) ([]*models.ColorMemo, error) {
-	memoRepository.db.Debug().Table("memos").Preload("Tags").Find(&memos)
 	err := memoRepository.db.Table("memos").Preload("Tags").Find(&memos).Error
 	if err != nil {
 		return nil, fmt.Errorf("sql error", err)

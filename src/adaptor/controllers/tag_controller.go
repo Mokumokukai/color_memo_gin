@@ -13,6 +13,7 @@ type tagController struct {
 type ITagController interface {
 	GetTags() ([]*models.Tag, error)
 	CreateTag(tag *models.Tag) (*models.Tag, error)
+	CreateTags(tags []*models.Tag) ([]*models.Tag, error)
 }
 
 func NewTagController(service service.ITagService) ITagController {
@@ -30,6 +31,14 @@ func (tagController *tagController) GetTags() ([]*models.Tag, error) {
 
 func (tagController *tagController) CreateTag(tag *models.Tag) (*models.Tag, error) {
 	res, err := tagController.tagService.Create(tag)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+func (tagController *tagController) CreateTags(tags []*models.Tag) ([]*models.Tag, error) {
+	res, err := tagController.tagService.CreateMul(tags)
 	if err != nil {
 		return nil, err
 	}

@@ -14,6 +14,7 @@ type tagService struct {
 type ITagService interface {
 	GetAll(tags []*models.Tag) ([]*models.Tag, error)
 	Create(tag *models.Tag) (*models.Tag, error)
+	CreateMul(tags []*models.Tag) ([]*models.Tag, error)
 }
 
 func NewTagService(repository repository.ITagRepository, presentor presenter.ITagPresenter) ITagService {
@@ -32,4 +33,12 @@ func (service *tagService) Create(tag *models.Tag) (*models.Tag, error) {
 		return nil, err
 	}
 	return service.TagPresenter.ResponseTag(res), nil
+}
+
+func (service *tagService) CreateMul(tags []*models.Tag) ([]*models.Tag, error) {
+	res, err := service.TagRepository.CreateMul(tags)
+	if err != nil {
+		return nil, err
+	}
+	return service.TagPresenter.ResponseTags(res), nil
 }

@@ -1,9 +1,11 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/Mokumokukai/color_memo_gin/src/adaptor/controllers"
+	"github.com/Mokumokukai/color_memo_gin/src/infrastructure/validators"
 	"github.com/Mokumokukai/color_memo_gin/src/models"
 	"github.com/Mokumokukai/color_memo_gin/src/utils"
 	"github.com/gin-gonic/gin"
@@ -25,6 +27,7 @@ type tagHandler struct {
 type ITagHandler interface {
 	GetTags() gin.HandlerFunc
 	CreateTag() gin.HandlerFunc
+	CreateTags() gin.HandlerFunc
 }
 
 func NewTagHandler(uc controllers.ITagController) ITagHandler {
@@ -34,11 +37,12 @@ func NewTagHandler(uc controllers.ITagController) ITagHandler {
 func (handler *tagHandler) GetTags() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
-		t, err := handler.tagController.GetTags()
+		ts, err := handler.tagController.GetTags()
 		if err != nil {
 			c.JSON(400, err)
+			return
 		}
-		c.JSON(200, tags_res{Tags: t})
+		c.JSON(200, tags_res{Tags: ts})
 	}
 }
 
@@ -55,7 +59,27 @@ func (handler *tagHandler) CreateTag() gin.HandlerFunc {
 		t, err := handler.tagController.CreateTag(req_t.Tag)
 		if err != nil {
 			c.JSON(400, err)
+			return
 		}
 		c.JSON(200, tag_res{Tag: t})
+	}
+}
+func (handler *tagHandler) CreateTags() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		b_bid := &validators.TagsValidator{}
+		if err := c.Bind(b_bid); err != nil {
+			c.JSON(http.StatusBadRequest, err.Error())
+			return
+		}
+		for _, v := range b_bid.Tags {
+			fmt.Println(v)
+		}
+		ts, err := handler.tagController.CreateTags(b_bid.Tags)
+		if err != nil {
+			c.JSON(400, err.Error())
+			return
+		}
+		c.JSON(http.StatusCreated, tags_res{Tags: ts})
+
 	}
 }

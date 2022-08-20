@@ -1,7 +1,10 @@
 package validators
 
+import "github.com/Mokumokukai/color_memo_gin/src/models"
+
 type TagValidator struct {
-	Tag struct {
-		Name string `form:"name" json:"name" binding:"exists,alphanum,min=2,max=13"`
-	}
+	models.Tag
+}
+type TagsValidator struct {
+	Tags []*models.Tag `form:"tags" json:"tags" binding:"dive" `
 }
