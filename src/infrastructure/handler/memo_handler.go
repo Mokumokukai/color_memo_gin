@@ -67,6 +67,7 @@ func (handler *memoHandler) CreateColorMemo() gin.HandlerFunc {
 			OwnerID:   creater_id,
 			Color1:    b_bid.ColorMemo.Color1[1:],
 			Color2:    b_bid.ColorMemo.Color2[1:],
+			Tags:      b_bid.ColorMemo.Tags,
 		}
 		fmt.Println(color_memo)
 		m, err := handler.memoController.CreateColorMemo(color_memo)

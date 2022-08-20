@@ -25,26 +25,32 @@ func (memoRepository *memoRepository) GetAll(memos []*models.ColorMemo) ([]*mode
 }
 
 func (memoRepository *memoRepository) Create(memo *models.ColorMemo) (*models.ColorMemo, error) {
+	CreateTags(memoRepository.db, memo.Tags)
 	err := memoRepository.db.Table("memos").Create(&memo).Error
 	if err != nil {
 		return nil, fmt.Errorf("sql error", err)
 	}
+
+	result := memoRepository.db.Table("memos").Where("id = ?", memo.ID).Association("Tags").Append(memo.Tags)
+	fmt.Println(result.Error())
 	return memo, nil
 }
 
 // owner_idとidはそれぞれ複製した人のユーザIDと新規メモIDを挿入するので、一旦他の変数に保存する。
 func (memoRepository *memoRepository) Duplicate(memo_id string, memo *models.ColorMemo) (*models.ColorMemo, error) {
-
+	//IDからメモを取得
 	new_memo := &models.ColorMemo{ID: memo_id}
-	if err := memoRepository.db.Table("memos").First(new_memo).Error; err != nil {
+	if err := memoRepository.db.Table("memos").Preload("Tags").First(new_memo).Error; err != nil {
 		return nil, fmt.Errorf("sql error", err)
 	}
 	new_memo.OwnerID = memo.OwnerID
 	new_memo.ID = memo.ID
+
 	if err := memoRepository.db.Table("memos").Create(new_memo).Error; err != nil {
 		return nil, fmt.Errorf("sql error", err)
 
 	}
+	memoRepository.db.Table("memos").Where("id = ?", new_memo.ID).Association("Tags").Append(new_memo.Tags)
 	return new_memo, nil
 }
 func (memoRepository *memoRepository) Delete(memo *models.ColorMemo) error {
