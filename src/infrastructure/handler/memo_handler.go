@@ -153,6 +153,7 @@ func (handler *memoHandler) EditColorMemo() gin.HandlerFunc {
 			OwnerID: user_id,
 			Color1:  b_bid.ColorMemo.Color1[1:],
 			Color2:  b_bid.ColorMemo.Color2[1:],
+			Tags:    b_bid.ColorMemo.Tags,
 		}
 
 		m, err := handler.memoController.EditColorMemo(color_memo)

@@ -64,8 +64,10 @@ func (memoRepository *memoRepository) Delete(memo *models.ColorMemo) error {
 
 //Updatesは変更するものがなくてもエラーを返さないのでまず、存在確認を先に行う。
 func (memoRepository *memoRepository) Edit(memo *models.ColorMemo) (*models.ColorMemo, error) {
-	if err := memoRepository.db.Table("memos").Where("id = ? AND owner_id = ?", memo.ID, memo.OwnerID).Updates(memo).Error; err != nil {
+
+	if err := memoRepository.db.Table("memos").Preload("tags").Where("id = ? AND owner_id = ?", memo.ID, memo.OwnerID).Updates(memo).Error; err != nil {
 		return nil, fmt.Errorf("cannot update", err)
 	}
+
 	return memo, nil
 }
