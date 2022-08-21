@@ -16,11 +16,15 @@ func (memoPresenter *memoPresenter) ResponseColorMemos(memos []*models.ColorMemo
 	for _, v := range memos {
 		v.Color1 = "#" + v.Color1
 		v.Color2 = "#" + v.Color2
+
 	}
 	return memos
 }
 func (memoPresenter *memoPresenter) ResponseColorMemo(memo *models.ColorMemo) *models.ColorMemo {
 	memo.Color1 = "#" + memo.Color1
 	memo.Color2 = "#" + memo.Color2
+	if memo.Tags == nil {
+		memo.Tags = []*models.Tag{}
+	}
 	return memo
 }
