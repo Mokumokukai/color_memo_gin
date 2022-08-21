@@ -9,13 +9,12 @@ import (
 )
 
 func CreateTag(db *gorm.DB, name string, id string) error {
-	fmt.Println(db.Table("tags").Create(&models.Tag{Name: name, ID: id}).Error)
-	return nil
+	return db.Table("tags").Create(&models.Tag{Name: name, ID: id}).Error
 }
 func CreateTags(db *gorm.DB, names []string, ids []string) error {
 	for i, v := range names {
 		if err := CreateTag(db, v, ids[i]); err != nil {
-			return err
+			fmt.Println(err)
 		}
 	}
 	return nil
