@@ -17,17 +17,56 @@ func NewColorMemoRepository(db *gorm.DB) repository.IColorMemoRepository {
 }
 
 func (memoRepository *memoRepository) GetAll(memos []*models.ColorMemo) ([]*models.ColorMemo, error) {
-	err := memoRepository.db.Table("memos").Find(&memos).Error
+	err := memoRepository.db.Table("memos").Preload("Tags").Find(&memos).Error
 	if err != nil {
 		return nil, fmt.Errorf("sql error", err)
 	}
-	return memos, err
+	return memos, nil
 }
 
 func (memoRepository *memoRepository) Create(memo *models.ColorMemo) (*models.ColorMemo, error) {
-	err := memoRepository.db.Table("memos").Create(&memo).Error
+	CreateTags(memoRepository.db, memo.Tags)
+	err := memoRepository.db.Table("memos").Create(memo).Error
 	if err != nil {
 		return nil, fmt.Errorf("sql error", err)
 	}
-	return memo, err
+
+	memoRepository.db.Table("memos").Where("id = ?", memo.ID).Association("Tags").Append(memo.Tags)
+	return memo, nil
+}
+
+// owner_idとidはそれぞれ複製した人のユーザIDと新規メモIDを挿入するので、一旦他の変数に保存する。
+func (memoRepository *memoRepository) Duplicate(memo_id string, memo *models.ColorMemo) (*models.ColorMemo, error) {
+	//IDからメモを取得
+	new_memo := &models.ColorMemo{ID: memo_id}
+	if err := memoRepository.db.Table("memos").Preload("Tags").First(new_memo).Error; err != nil {
+		return nil, fmt.Errorf("sql error", err)
+	}
+	new_memo.OwnerID = memo.OwnerID
+	new_memo.ID = memo.ID
+
+	if err := memoRepository.db.Table("memos").Create(new_memo).Error; err != nil {
+		return nil, fmt.Errorf("sql error", err)
+
+	}
+	memoRepository.db.Table("memos").Where("id = ?", new_memo.ID).Association("Tags").Append(new_memo.Tags)
+	return new_memo, nil
+}
+func (memoRepository *memoRepository) Delete(memo *models.ColorMemo) error {
+
+	if err := memoRepository.db.Table("memos").Where("id = ? AND owner_id = ?", memo.ID, memo.OwnerID).Delete(memo).Error; err != nil {
+		return fmt.Errorf("sql error", err)
+
+	}
+	return nil
+}
+
+//Updatesは変更するものがなくてもエラーを返さないのでまず、存在確認を先に行う。
+func (memoRepository *memoRepository) Edit(memo *models.ColorMemo) (*models.ColorMemo, error) {
+
+	if err := memoRepository.db.Table("memos").Preload("tags").Where("id = ? AND owner_id = ?", memo.ID, memo.OwnerID).Updates(memo).Error; err != nil {
+		return nil, fmt.Errorf("cannot update", err)
+	}
+
+	return memo, nil
 }

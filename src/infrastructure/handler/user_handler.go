@@ -5,8 +5,8 @@ import (
 
 	"github.com/Mokumokukai/color_memo_gin/src/adaptor/controllers"
 	"github.com/Mokumokukai/color_memo_gin/src/models"
+	"github.com/Mokumokukai/color_memo_gin/src/utils"
 	"github.com/gin-gonic/gin"
-	gonanoid "github.com/matoous/go-nanoid/v2"
 )
 
 type userHandler struct {
@@ -44,7 +44,7 @@ func (handler *userHandler) Register() gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, err)
 		}
 		var user models.User
-		user.ID, _ = gonanoid.New(7)
+		user.ID, _ = utils.AlphaNumNanoID(7)
 		user.Name = req_u.Name
 		uid, _ := c.Get("UID")
 		user.UID, _ = uid.(string)

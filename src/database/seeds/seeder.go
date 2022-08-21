@@ -14,7 +14,7 @@ func main() {
 
 	for _, seed := range seeds.All() {
 		if err := seed.Run(db.Connection); err != nil {
-			log.Fatalf("Running seed '%s', failed with error: %s", seed.Name, err)
+			log.Printf("Running seed '%s', failed with error: %s", seed.Name, err)
 		}
 	}
 }

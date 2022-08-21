@@ -13,6 +13,9 @@ type memoController struct {
 type IColorMemoController interface {
 	GetColorMemos() ([]*models.ColorMemo, error)
 	CreateColorMemo(memo *models.ColorMemo) (*models.ColorMemo, error)
+	DuplicateColorMemo(memo_id string, memo *models.ColorMemo) (*models.ColorMemo, error)
+	DeleteColorMemo(memo *models.ColorMemo) error
+	EditColorMemo(memo *models.ColorMemo) (*models.ColorMemo, error)
 }
 
 func NewColorMemoController(service service.IColorMemoService) IColorMemoController {
@@ -29,6 +32,26 @@ func (memoController *memoController) GetColorMemos() ([]*models.ColorMemo, erro
 }
 func (memoController *memoController) CreateColorMemo(memo *models.ColorMemo) (*models.ColorMemo, error) {
 	res, err := memoController.memoService.Create(memo)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+func (memoController *memoController) DuplicateColorMemo(memo_id string, memo *models.ColorMemo) (*models.ColorMemo, error) {
+	res, err := memoController.memoService.Duplicate(memo_id, memo)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+func (memoController *memoController) DeleteColorMemo(memo *models.ColorMemo) error {
+	return memoController.memoService.Delete(memo)
+
+}
+
+func (memoController *memoController) EditColorMemo(memo *models.ColorMemo) (*models.ColorMemo, error) {
+	res, err := memoController.memoService.Edit(memo)
 	if err != nil {
 		return nil, err
 	}
