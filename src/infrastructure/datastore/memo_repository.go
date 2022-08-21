@@ -26,13 +26,12 @@ func (memoRepository *memoRepository) GetAll(memos []*models.ColorMemo) ([]*mode
 
 func (memoRepository *memoRepository) Create(memo *models.ColorMemo) (*models.ColorMemo, error) {
 	CreateTags(memoRepository.db, memo.Tags)
-	err := memoRepository.db.Table("memos").Create(&memo).Error
+	err := memoRepository.db.Table("memos").Create(memo).Error
 	if err != nil {
 		return nil, fmt.Errorf("sql error", err)
 	}
 
-	result := memoRepository.db.Table("memos").Where("id = ?", memo.ID).Association("Tags").Append(memo.Tags)
-	fmt.Println(result.Error())
+	memoRepository.db.Table("memos").Where("id = ?", memo.ID).Association("Tags").Append(memo.Tags)
 	return memo, nil
 }
 
