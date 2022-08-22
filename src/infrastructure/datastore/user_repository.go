@@ -19,14 +19,14 @@ func NewUserRepository(db *gorm.DB) repository.IUserRepository {
 func (userRepository *userRepository) GetAll(users []*models.User) ([]*models.User, error) {
 	err := userRepository.db.Find(&users).Error
 	if err != nil {
-		return nil, fmt.Errorf("sql error", err)
+		return nil, fmt.Errorf("sql error: %v", err)
 	}
 	return users, err
 }
 func (userRepository *userRepository) Register(user *models.User) (*models.User, error) {
 	err := userRepository.db.Create(&user).Error
 	if err != nil {
-		return nil, fmt.Errorf("sql error", err)
+		return nil, fmt.Errorf("sql error: %v", err)
 	}
 	return user, err
 }
