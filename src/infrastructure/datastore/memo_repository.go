@@ -26,11 +26,11 @@ func (memoRepository *memoRepository) GetAll(memos []*models.ColorMemo) ([]*mode
 
 func (memoRepository *memoRepository) Create(memo *models.ColorMemo) (*models.ColorMemo, error) {
 	CreateTags(memoRepository.db, memo.Tags)
-	err := memoRepository.db.Table("memos").Create(memo).Error
-	if err != nil {
-		return nil, fmt.Errorf("sql error: %v", err)
+	result := memoRepository.db.Table("memos").Create(memo)
+	if result.Error != nil {
+		return nil, fmt.Errorf("sql error: %v", result.Error)
 	}
-
+	memoRepository.db.Table("memos").Find(memo)
 	memoRepository.db.Table("memos").Where("id = ?", memo.ID).Association("Tags").Append(memo.Tags)
 	return memo, nil
 }
@@ -63,6 +63,7 @@ func (memoRepository *memoRepository) Delete(memo *models.ColorMemo) error {
 
 //Updatesは変更するものがなくてもエラーを返さないのでまず、存在確認を先に行う。
 func (memoRepository *memoRepository) Edit(memo *models.ColorMemo) (*models.ColorMemo, error) {
+	CreateTags(memoRepository.db, memo.Tags)
 
 	if err := memoRepository.db.Table("memos").Preload("tags").Where("id = ? AND owner_id = ?", memo.ID, memo.OwnerID).Updates(memo).Error; err != nil {
 		return nil, fmt.Errorf("cannot update: %v", err)
